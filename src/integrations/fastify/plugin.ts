@@ -7,6 +7,7 @@ import { registerLogoutRoute } from "./routes/logout.js";
 import type { CloakAuthRoutes } from "./types.js";
 import fp from "fastify-plugin";
 import cookie from "@fastify/cookie";
+import { createOriginGuard } from "./origin.js";
 
 declare module "fastify" {
   interface FastifyInstance {
@@ -20,6 +21,7 @@ export interface CloakAuthPluginOptions {
   secureCookies?: boolean;
   routePrefix?: string;
   routes?: boolean | CloakAuthRoutes;
+  allowedOrigins?: readonly string[];
 }
 
 const cloakAuthPluginImpl: FastifyPluginAsync<CloakAuthPluginOptions> = async (
@@ -28,6 +30,7 @@ const cloakAuthPluginImpl: FastifyPluginAsync<CloakAuthPluginOptions> = async (
 ) => {
   const cookieName = options.cookieName ?? "cloak_session";
   const routePrefix = options.routePrefix ?? "/auth";
+  const requireAllowedOrigin = createOriginGuard(options.allowedOrigins ?? []);
 
   if (!/^\/[A-Za-z0-9_-]+(?:\/[A-Za-z0-9_-]+)*$/.test(routePrefix)) {
     throw new Error(
@@ -50,6 +53,7 @@ const cloakAuthPluginImpl: FastifyPluginAsync<CloakAuthPluginOptions> = async (
     routePrefix,
     cookieName,
     cookieOptions,
+    requireAllowedOrigin,
   };
 
   if (options.routes !== false) {

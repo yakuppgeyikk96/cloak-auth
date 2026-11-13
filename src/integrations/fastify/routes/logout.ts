@@ -9,6 +9,9 @@ export function registerLogoutRoute(
 
   app.post(
     `${routePrefix}/logout`,
+    {
+      onRequest: options.requireAllowedOrigin,
+    },
     async (request, reply) => {
       reply.header("Cache-Control", "no-store");
       const token = request.cookies[cookieName];

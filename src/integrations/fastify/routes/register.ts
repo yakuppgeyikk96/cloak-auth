@@ -11,6 +11,9 @@ export function registerRegisterRoute(
 
   app.post<{ Body: RegisterInput }>(
     `${routePrefix}/register`,
+    {
+      onRequest: options.requireAllowedOrigin,
+    },
     async (request, reply) => {
       reply.header("Cache-Control", "no-store");
 

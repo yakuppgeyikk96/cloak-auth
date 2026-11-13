@@ -11,6 +11,9 @@ export function registerLoginRoute(
 
   app.post<{ Body: LoginInput }>(
     `${routePrefix}/login`,
+    {
+      onRequest: options.requireAllowedOrigin,
+    },
     async (request, reply) => {
       try {
         const result = await auth.login(request.body);

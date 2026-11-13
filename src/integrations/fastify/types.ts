@@ -9,6 +9,9 @@ export interface CloakAuthRoutes {
 
 export interface AuthRouteOptions {
   auth: ReturnType<typeof createAuth>;
+  requireAllowedOrigin: ReturnType<
+    typeof import("./origin.js").createOriginGuard
+  >;
   cookieName: string;
   routePrefix: string;
   cookieOptions: {
