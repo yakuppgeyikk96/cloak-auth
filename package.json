@@ -1,0 +1,30 @@
+{
+  "name": "cloak-auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./adapters/drizzle-postgres": {
+      "types": "./dist/adapters/drizzle-postgres/index.d.ts",
+      "import": "./dist/adapters/drizzle-postgres/index.js"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "fastify": "^5.12.8",
+    "pg": "^8.23.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "argon2": "^0.45.2",
+    "drizzle-orm": "^0.45.4"
+  }
+}
