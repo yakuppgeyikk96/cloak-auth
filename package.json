@@ -14,6 +14,10 @@
     "./adapters/drizzle-postgres": {
       "types": "./dist/adapters/drizzle-postgres/index.d.ts",
       "import": "./dist/adapters/drizzle-postgres/index.js"
+    },
+    "./fastify": {
+      "types": "./dist/integrations/fastify/index.d.ts",
+      "import": "./dist/integrations/fastify/index.js"
     }
   },
   "devDependencies": {
@@ -24,7 +28,9 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.1.5",
     "argon2": "^0.45.2",
-    "drizzle-orm": "^0.45.4"
+    "drizzle-orm": "^0.45.4",
+    "fastify-plugin": "^6.0.1"
   }
 }
